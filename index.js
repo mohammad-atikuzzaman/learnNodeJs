@@ -7,16 +7,13 @@ const events = require("events");
 const eventEmitter = new events.EventEmitter();
 
 // this is home route default route on node js
-/*
 const homeRoute = (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
   res.write("Hello world form node js server");
   res.end();
 };
-*/
 
 // this is queryString receive route
-/*
 const getUrl=(req, res)=>{
   res.writeHead(200, {"Content-Type": "text/html"})
   if(req.url){
@@ -25,10 +22,9 @@ const getUrl=(req, res)=>{
   res.write("hello")
   res.end()
 }
-  */
+
 
 // this is query parameters receive route
-/*
 const receiveQueryParams = (req, res) => {
   res.writeHeader(200, { "Content-Type": "text/html" });
   const q = url.parse(req.url, true).query;
@@ -47,46 +43,39 @@ const receiveQueryParams = (req, res) => {
   res.write("hello");
   res.end();
 };
-*/
 
 // this route for readFiles on node js system
-/* const fsRoute = (req, res) => {
+const fsRoute = (req, res) => {
   fs.readFile("./files/demofile.html", (err, data) => {
- res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(data)   
-    res.end()
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write(data);
+    res.end();
   });
 };
-*/
 
 // this route for append files
-/*
 const appendFiles = (req, res) => {
   // here I am getting text form req.url and saving that text on myfile.txt
-  fs.appendFile("myfile3.txt", req.url , (err) => {
+  fs.appendFile("myfile3.txt", req.url, (err) => {
     if (err) {
       throw err;
     }
     console.log("Saved");
-    res.end("fileSaved")
+    res.end("fileSaved");
   });
 };
-*/
 
 // this route for open file
-/*
-const openFiles =(req, res)=>{
-  fs.open("myfile2.txt", "w", (err, file)=>{
-    if(err){
-      throw err
+const openFiles = (req, res) => {
+  fs.open("myfile2.txt", "w", (err, file) => {
+    if (err) {
+      throw err;
     }
-    console.log("Saved")
-  })
-}
-*/
+    console.log("Saved");
+  });
+};
 
 // this route for writing files
-/*
 const writeFiles = (req, res) => {
   fs.writeFile("myFile3.txt", "I am writing files data", (err) => {
     if (err) {
@@ -95,27 +84,23 @@ const writeFiles = (req, res) => {
     res.end("file writen");
   });
 };
-*/
 
 // for updating the file content we can use appendFile or write file
 /*
- if we use appendFiles it will save previous files data and add new data
-
- if we use writeFile it will delete previous file data and replace with new data
-*/
+ ** if we use appendFiles it will save previous files data and add new data.
+ ** if we use writeFile it will delete previous file data and replace with new data.
+ */
 
 // this route for deleting files
-/*
 const deleteFiles = (req, res) => {
   // I have deleted  myfile2.txt
   fs.unlink("myfile2.txt", (err) => {
     if (err) {
       throw err;
     }
-    res.end("file deleted")
+    res.end("file deleted");
   });
 };
-*/
 
 // this route for rename files
 /*
@@ -130,7 +115,6 @@ const renameFiles = (req, res) => {
 */
 
 // testing url
-/*
 const testUrl = (req, res) => {
   var addr = "http://localhost:3000/winter?year=2017&month=09";
 
@@ -139,15 +123,13 @@ const testUrl = (req, res) => {
   console.log(q.host);
   console.log(q.pathname);
   console.log(q.search);
-  const queryData = q.query
-  console.log(queryData.year)
+  const queryData = q.query;
+  console.log(queryData.year);
 
   res.end(addr);
 };
-*/
 
 // test nodejs file server
-/*
 const fileServer = (req, res) => {
   const q = url.parse(req.url, true);
   const fileName = "./files" + q.pathname + ".html";
@@ -171,20 +153,16 @@ const fileServer = (req, res) => {
     });
   }
 };
-*/
 
 // Use of third party modules (npm package)
-/*
 const testNpmPackage = (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
   // I have installed text uppercase module
   res.write(uc.upperCase("Hello world"));
   return res.end();
 };
-*/
 
 // this route for testing node js events
-
 const testEvent = (req, res) => {
   // when we make any action node js fire a event.
   // when we are opening a file , node js fired a event named open
