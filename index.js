@@ -52,8 +52,8 @@ const receiveQueryParams = (req, res) => {
 // this route for readFiles on node js system
 /* const fsRoute = (req, res) => {
   fs.readFile("./files/demofile.html", (err, data) => {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(data)
+ res.writeHead(200, { "Content-Type": "text/html" });
+    res.write(data)   
     res.end()
   });
 };
@@ -221,18 +221,27 @@ const testUploadFiles = async (req, res) => {
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload[0].filepath;
       var newpath = "./uploaded/" + files.filetoupload[0].originalFilename;
-      
-      // return console.log(files.filetoupload[0].originalFilename);
-      // return console.log(newpath)
 
-      fs.rename(oldpath, newpath, (err)=>{
-        if(err){
-          throw err
+      fs.copyFile(oldpath, newpath, (err) => {
+        if (err) {
+          throw err;
         }
-        res.write("File uploaded and moved")
-        res.end()
-      })
-
+        fs.unlink(oldpath, (err) => {
+          if (err) {
+            throw err;
+          }
+          console.log("Temporary file deleted");
+        });
+        // res.write("File uploaded and moved");
+        fs.readFile(newpath, (err, data) => {
+          if (err) {
+            throw err;
+          }
+          res.write(data);
+          res.end();
+        });
+        // res.end();
+      });
     });
   } else {
     res.writeHead(200, { "Content-Type": "text/html" });
